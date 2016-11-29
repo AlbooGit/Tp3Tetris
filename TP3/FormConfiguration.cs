@@ -24,9 +24,10 @@ namespace TP3
 
         }
 
-        private void btnOkConfig_Click(object sender, EventArgs e)
+        public void btnOkConfig_Click(object sender, EventArgs e)
         {
 
+            principal.InitialiserSurfaceDeJeu((int)numericUpDown1.Value, (int)numericUpDown2.Value);
             Close();
         }
 
@@ -37,8 +38,7 @@ namespace TP3
 
         public void ConfigurationJeu()
         {
-            principal.nbLignes = (int)numericUpDown1.Value;
-            principal.nbColonnes = (int)numericUpDown2.Value;
+            
         }
     }
 }

@@ -9,14 +9,18 @@ namespace TP3
         public FormPrincipal()
         {
             InitializeComponent();
+            int[,] blocActif = new int[2, 2];
+
         }
 
         #region Code fourni
+        FormConfiguration config = new FormConfiguration();
 
         // Représentation visuelles du jeu en mémoire.
         PictureBox[,] toutesImagesVisuelles = null;
         public int nbLignes = 20;
         public int nbColonnes = 10;
+        
 
         /// <summary>
         /// Gestionnaire de l'événement se produisant lors du premier affichage 
@@ -31,7 +35,7 @@ namespace TP3
             InitialiserSurfaceDeJeu(nbLignes, nbColonnes);
         }
 
-        private void InitialiserSurfaceDeJeu(int nbLignes, int nbCols)
+        public void InitialiserSurfaceDeJeu(int nbLignes, int nbCols)
         {
             // Création d'une surface de jeu 10 colonnes x 20 lignes
             toutesImagesVisuelles = new PictureBox[nbLignes, nbCols];
@@ -63,9 +67,18 @@ namespace TP3
         }
         #endregion
 
-
-
-
+        enum TypeEtat
+        {
+            None,
+            Gele,
+            Carre,
+            Ligne,
+            T,
+            L,
+            J,
+            S,
+            Z
+        }
 
         #region Code à développer
         /// <summary>
@@ -98,7 +111,6 @@ namespace TP3
 
         private void configurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormConfiguration config = new FormConfiguration();
             config.ShowDialog();
         }
 
