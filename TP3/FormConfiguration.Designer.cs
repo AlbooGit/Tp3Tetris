@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tBoxNbLignes = new System.Windows.Forms.TextBox();
-            this.tBoxNbColonnes = new System.Windows.Forms.TextBox();
             this.lbNbLignes = new System.Windows.Forms.Label();
             this.lbNbColonnes = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -37,23 +35,12 @@
             this.btnOkConfig = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // tBoxNbLignes
-            // 
-            this.tBoxNbLignes.Location = new System.Drawing.Point(124, 28);
-            this.tBoxNbLignes.Name = "tBoxNbLignes";
-            this.tBoxNbLignes.Size = new System.Drawing.Size(100, 20);
-            this.tBoxNbLignes.TabIndex = 0;
-            this.tBoxNbLignes.TextChanged += new System.EventHandler(this.tBoxNbLignes_TextChanged);
-            // 
-            // tBoxNbColonnes
-            // 
-            this.tBoxNbColonnes.Location = new System.Drawing.Point(124, 57);
-            this.tBoxNbColonnes.Name = "tBoxNbColonnes";
-            this.tBoxNbColonnes.Size = new System.Drawing.Size(100, 20);
-            this.tBoxNbColonnes.TabIndex = 1;
             // 
             // lbNbLignes
             // 
@@ -75,13 +62,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numericUpDown2);
+            this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.btnOkConfig);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.tBoxNbLignes);
             this.groupBox1.Controls.Add(this.lbNbColonnes);
-            this.groupBox1.Controls.Add(this.tBoxNbColonnes);
             this.groupBox1.Controls.Add(this.lbNbLignes);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -129,6 +116,51 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(125, 31);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(54, 20);
+            this.numericUpDown1.TabIndex = 8;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(125, 60);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(54, 20);
+            this.numericUpDown2.TabIndex = 9;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
             // FormConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -141,14 +173,13 @@
             this.Text = "Configuration du Jeu";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox tBoxNbLignes;
-        private System.Windows.Forms.TextBox tBoxNbColonnes;
         private System.Windows.Forms.Label lbNbLignes;
         private System.Windows.Forms.Label lbNbColonnes;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -156,5 +187,7 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button btnOkConfig;
         private System.Windows.Forms.Button button2;
+        public System.Windows.Forms.NumericUpDown numericUpDown2;
+        public System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

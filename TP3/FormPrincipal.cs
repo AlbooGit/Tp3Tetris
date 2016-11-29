@@ -18,7 +18,6 @@ namespace TP3
         public int nbLignes = 20;
         public int nbColonnes = 10;
 
-
         /// <summary>
         /// Gestionnaire de l'événement se produisant lors du premier affichage 
         /// du formulaire principal.

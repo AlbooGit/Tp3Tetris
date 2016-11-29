@@ -12,27 +12,33 @@ namespace TP3
 {
     public partial class FormConfiguration : Form
     {
-        
+        FormPrincipal principal = new FormPrincipal();
 
         public FormConfiguration()
         {
             InitializeComponent();
         }
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void tBoxNbLignes_TextChanged(object sender, EventArgs e)
-        {
-            FormPrincipal principal = new FormPrincipal();
-            principal.nbLignes = Convert.ToInt32(tBoxNbLignes.Text);
-        }
-
         private void btnOkConfig_Click(object sender, EventArgs e)
         {
 
+            Close();
+        }
+
+        public void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public void ConfigurationJeu()
+        {
+            principal.nbLignes = (int)numericUpDown1.Value;
+            principal.nbColonnes = (int)numericUpDown2.Value;
         }
     }
 }
