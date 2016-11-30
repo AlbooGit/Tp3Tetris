@@ -14,7 +14,7 @@ namespace TP3
         }
 
         #region Code fourni
-        FormConfiguration config = new FormConfiguration();
+        
 
         // Représentation visuelles du jeu en mémoire.
         PictureBox[,] toutesImagesVisuelles = null;
@@ -111,6 +111,7 @@ namespace TP3
 
         private void configurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FormConfiguration config = new FormConfiguration(this);
             config.ShowDialog();
         }
 
@@ -123,7 +124,7 @@ namespace TP3
         {
 
         }
-    }
+  }
 
 
 
