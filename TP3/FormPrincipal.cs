@@ -8,6 +8,7 @@ namespace TP3
     {
         public FormPrincipal()
         {
+            FormConfiguration config = new FormConfiguration(this);
             int[,] tableauEtats = new int[nbLignes, nbColonnes];
             InitializeComponent();
             int[,] blocActif = new int[2, 2];
@@ -110,9 +111,11 @@ namespace TP3
 
         }
 
-        private void configurationToolStripMenuItem_Click(object sender, EventArgs e)
+        public void configurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormConfiguration config = new FormConfiguration(this);
+            config.numericUpDown1.Value = nbLignes;
+            config.numericUpDown2.Value = nbColonnes;
             config.ShowDialog();
         }
 
@@ -123,7 +126,12 @@ namespace TP3
 
         private void réinitialiséPartieToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            InitialiserSurfaceDeJeu(nbLignes = 20, nbColonnes = 10);
+        }
 
+        void InitialiserPiece()
+        {
+                
         }
   }
 
