@@ -8,6 +8,7 @@ namespace TP3
     {
         public FormPrincipal()
         {
+            int[,] tableauEtats = new int[nbLignes, nbColonnes];
             InitializeComponent();
             int[,] blocActif = new int[2, 2];
 
@@ -69,10 +70,10 @@ namespace TP3
 
         enum TypeEtat
         {
-            None,
-            Gele,
-            Carre,
-            Ligne,
+            NONE,
+            GELE,
+            CARRE,
+            LIGNE,
             T,
             L,
             J,
