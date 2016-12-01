@@ -10,9 +10,7 @@ namespace TP3
         {
             GenererTableauEtat(nbLignes, nbColonnes);
             FormConfiguration config = new FormConfiguration(this);
-            int[,] tableauEtats = new int[nbLignes, nbColonnes];
             InitializeComponent();
-
         }
 
         int[,] blocActif = new int[3, 3];
@@ -24,7 +22,7 @@ namespace TP3
         PictureBox[,] toutesImagesVisuelles = null;
         public int nbLignes = 20;
         public int nbColonnes = 10;
-
+        int[,] tableauEtats = new int[20, 10];
 
         /// <summary>
         /// Gestionnaire de l'événement se produisant lors du premier affichage 
@@ -133,7 +131,7 @@ namespace TP3
 
         void InitialiserPieceDansTableau(int pieceRandom)
         {
-            for(int i = 0; i < tableauJeu.)
+            //for (int i = 0; i < )
 
 
 
@@ -182,7 +180,7 @@ namespace TP3
         /// <param name="nbColonnes"></param>
         public void GenererTableauEtat(int nbLignes, int nbColonnes)
         {
-            int[,] tableauEtats = new int[nbLignes, nbColonnes];
+            tableauEtats = new int[nbLignes, nbColonnes];
 
             for (int i = 0; i < nbLignes; i++)
             {
