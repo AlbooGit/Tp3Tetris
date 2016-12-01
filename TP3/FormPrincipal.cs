@@ -8,20 +8,15 @@ namespace TP3
   {
     public FormPrincipal()
     {
-        public FormPrincipal()
-        {
-            FormConfiguration config = new FormConfiguration(this);
-            InitializeComponent();
+      FormConfiguration config = new FormConfiguration(this);
+      int[,] tableauEtats = new int[nbLignes, nbColonnes];
+      InitializeComponent();
+    }
 
     #region Variables Partagées
     int[,] blocActif = new int[3, 3];
     
 
-        // Déclaration des tableaux pour le blocActif
-        // 3x3 = L, S, T, J, Z
-        // 4x4 = Ligne et Carré     
-        int[,] blocActif = new int[3, 3];
-        int[,] blocActifCarreLigne = new int[4, 4];
 
 
     #endregion
@@ -59,26 +54,6 @@ namespace TP3
       {
         tableauJeu.RowStyles[i].Height = tableauJeu.Height / tableauJeu.RowCount;
         for (int j = 0; j < tableauJeu.ColumnCount; j++)
-        #region InitialiserTableauEtat 
-
-        // <scloutier>
-        void InitialiserTableauEtat(int nbLignes, int nbColonnes)
-        {
-            int[,] tableauEtats = new int[nbLignes, nbColonnes];
-
-            for (int i = 0; i < nbLignes; i++)
-            {
-                for (int j = 0; j < nbColonnes; j++)
-                {
-                    tableauEtats[i, j] = 2;
-                }
-            }
-
-        }
-        // </scloutier>
-        #endregion
-        
-        enum TypeEtat
         {
           tableauJeu.ColumnStyles[j].Width = tableauJeu.Width / tableauJeu.ColumnCount;
           // Création dynamique des PictureBox qui contiendront les pièces de jeu
@@ -198,7 +173,7 @@ namespace TP3
 
 
     }
-    }
+  }
 
 
 
