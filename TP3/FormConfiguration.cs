@@ -10,36 +10,37 @@ using System.Windows.Forms;
 
 namespace TP3
 {
-  public partial class FormConfiguration : Form
-  {
-    FormPrincipal principal;
-
-    public FormConfiguration(FormPrincipal formPrincipal)
+    public partial class FormConfiguration : Form
     {
-      InitializeComponent();
-      this.principal = formPrincipal;
+        FormPrincipal principal;
+
+        public FormConfiguration(FormPrincipal formPrincipal)
+        {
+            InitializeComponent();
+            this.principal = formPrincipal;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        public void btnOkConfig_Click(object sender, EventArgs e)
+        {
+
+            principal.InitialiserSurfaceDeJeu(principal.nbLignes = (int)numericUpDown1.Value, principal.nbColonnes = (int)numericUpDown2.Value);
+            principal.GenererTableauEtat(principal.nbLignes = (int)numericUpDown1.Value, principal.nbColonnes = (int)numericUpDown2.Value);
+            this.Close();
+        }
+
+        public void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public void ConfigurationJeu()
+        {
+
+        }
     }
-
-    private void button1_Click(object sender, EventArgs e)
-    {
-      this.Close();
-    }
-
-    public void btnOkConfig_Click(object sender, EventArgs e)
-    {
-      
-      principal.InitialiserSurfaceDeJeu(principal.nbLignes = (int)numericUpDown1.Value, principal.nbColonnes = (int)numericUpDown2.Value);
-      this.Close();
-    }
-
-    public void numericUpDown1_ValueChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    public void ConfigurationJeu()
-    {
-
-    }
-  }
 }
