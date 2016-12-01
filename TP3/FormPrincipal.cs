@@ -12,7 +12,7 @@ namespace TP3
             FormConfiguration config = new FormConfiguration(this);
             int[,] tableauEtats = new int[nbLignes, nbColonnes];
             InitializeComponent();
-            
+
         }
 
         int[,] blocActif = new int[3, 3];
@@ -133,7 +133,7 @@ namespace TP3
 
         void InitialiserPieceDansTableau(int pieceRandom)
         {
-
+            for(int i = 0; i < tableauJeu.)
 
 
 
@@ -184,9 +184,9 @@ namespace TP3
         {
             int[,] tableauEtats = new int[nbLignes, nbColonnes];
 
-            for(int i = 0; i < nbLignes; i++)
+            for (int i = 0; i < nbLignes; i++)
             {
-                for(int j = 0; j < nbColonnes; j++)
+                for (int j = 0; j < nbColonnes; j++)
                 {
                     tableauEtats[i, j] = (int)TypeEtat.NONE; // Initialisation au type -> None
                 }
