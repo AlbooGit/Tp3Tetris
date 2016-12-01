@@ -9,21 +9,23 @@ namespace TP3
         public FormPrincipal()
         {
             FormConfiguration config = new FormConfiguration(this);
-            int[,] tableauEtats = new int[nbLignes, nbColonnes];
             InitializeComponent();
-            int[,] blocActif = new int[2, 2];
 
         }
 
-        #region Code fourni
-        
+        // Déclaration des tableaux pour le blocActif
+        // 3x3 = L, S, T, J, Z
+        // 4x4 = Ligne et Carré     
+        int[,] blocActif = new int[3, 3];
+        int[,] blocActifCarreLigne = new int[4, 4];
 
         // Représentation visuelles du jeu en mémoire.
+
         PictureBox[,] toutesImagesVisuelles = null;
         public int nbLignes = 20;
         public int nbColonnes = 10;
-        
 
+        #region CodeProf
         /// <summary>
         /// Gestionnaire de l'événement se produisant lors du premier affichage 
         /// du formulaire principal.
@@ -67,8 +69,27 @@ namespace TP3
                 }
             }
         }
+
         #endregion
 
+        #region InitialiserTableauEtat 
+        // <scloutier>
+        void InitialiserTableauEtat(int nbLignes, int nbColonnes)
+        {
+            int[,] tableauEtats = new int[nbLignes, nbColonnes];
+
+            for (int i = 0; i < nbLignes; i++)
+            {
+                for (int j = 0; j < nbColonnes; j++)
+                {
+                    tableauEtats[i, j] = 2;
+                }
+            }
+
+        }
+        // </scloutier>
+        #endregion
+        
         enum TypeEtat
         {
             NONE,
@@ -81,6 +102,7 @@ namespace TP3
             S,
             Z
         }
+
 
         #region Code à développer
         /// <summary>
@@ -105,6 +127,7 @@ namespace TP3
         }
 
         #endregion
+
 
         private void configurationDuJeuToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -131,9 +154,16 @@ namespace TP3
 
         void InitialiserPiece()
         {
-                
+            Random rnd = new Random();
+            int randomPiece = rnd.Next(2, 8);
+
+            if (randomPiece == 2)
+            {
+
+            }
+
         }
-  }
+    }
 
 
 
