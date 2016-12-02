@@ -36,11 +36,14 @@
             this.quittezToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableauJeu
             // 
+            this.tableauJeu.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.tableauJeu.ColumnCount = 20;
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.63538F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.220217F));
@@ -61,7 +64,7 @@
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 51F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -278,19 +281,19 @@
             // réinitialiséPartieToolStripMenuItem
             // 
             this.réinitialiséPartieToolStripMenuItem.Name = "réinitialiséPartieToolStripMenuItem";
-            this.réinitialiséPartieToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.réinitialiséPartieToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.réinitialiséPartieToolStripMenuItem.Text = "Réinitialisé partie";
             this.réinitialiséPartieToolStripMenuItem.Click += new System.EventHandler(this.réinitialiséPartieToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
             // 
             // quittezToolStripMenuItem
             // 
             this.quittezToolStripMenuItem.Name = "quittezToolStripMenuItem";
-            this.quittezToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.quittezToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.quittezToolStripMenuItem.Text = "Quittez";
             this.quittezToolStripMenuItem.Click += new System.EventHandler(this.quittezToolStripMenuItem_Click);
             // 
@@ -307,9 +310,29 @@
             // configurationToolStripMenuItem
             // 
             this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
-            this.configurationToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.configurationToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.configurationToolStripMenuItem.Text = "Configuration";
             this.configurationToolStripMenuItem.Click += new System.EventHandler(this.configurationToolStripMenuItem_Click);
+            // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(47, 57);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.TabIndex = 3;
+            this.btnStart.Text = "Start Game";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(54, 116);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(68, 31);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "DESCEND";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormPrincipal
             // 
@@ -317,6 +340,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(444, 564);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.tableauJeu);
             this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
@@ -341,6 +366,8 @@
         private System.Windows.Forms.ToolStripMenuItem réinitialiséPartieToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem quittezToolStripMenuItem;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button button1;
     }
 }
 

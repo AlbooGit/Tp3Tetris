@@ -8,22 +8,21 @@ namespace TP3
     {
         public FormPrincipal()
         {
-            GenererTableauEtat(nbLignes, nbColonnes);
             FormConfiguration config = new FormConfiguration(this);
             InitializeComponent();
         }
 
         int[] blocActifY = new int[4];
         int[] blocActifX = new int[4];
-        int[] ligneCourante = new int[4];
-        int[] colonneCourante = new int[4];
+        int ligneCourante = 0;
+        int colonneCourante = 0;
 
 
         // Représentation visuelles du jeu en mémoire.
         PictureBox[,] toutesImagesVisuelles = null;
         public int nbLignes = 20;
         public int nbColonnes = 10;
-        int[,] tableauEtats = new int[20, 10];
+        TypeEtat[,] tableauEtats = new TypeEtat[20, 10];
 
         /// <summary>
         /// Gestionnaire de l'événement se produisant lors du premier affichage 
@@ -131,122 +130,157 @@ namespace TP3
             GenererTableauEtat(nbLignes = 20, nbColonnes = 10);
         }
 
-        void InitialiserPieceDansTableau(int pieceRandom)
+        void InitialiserPieceDansTableau()
         {
-            for (int i = 0; i < tableauEtats.GetLength(0); i++)
+            TypeEtat randomPiece = GenererPieceAleatoire();
+            for (int i = 0; i < blocActifY.Length; i++)
             {
-                for (int j = 0; j < tableauEtats.GetLength(1); j++)
+                tableauEtats[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]] = randomPiece;
+                if (randomPiece == TypeEtat.CARRE)
                 {
-
+                    toutesImagesVisuelles[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]].BackColor = Color.Yellow;
+                }
+                else if (randomPiece == TypeEtat.LIGNE)
+                {
+                    toutesImagesVisuelles[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]].BackColor = Color.Blue;
+                }
+                else if (randomPiece == TypeEtat.T)
+                {
+                    toutesImagesVisuelles[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]].BackColor = Color.Purple;
+                }
+                else if (randomPiece == TypeEtat.L)
+                {
+                    toutesImagesVisuelles[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]].BackColor = Color.Green;
+                }
+                else if (randomPiece == TypeEtat.J)
+                {
+                    toutesImagesVisuelles[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]].BackColor = Color.OrangeRed;
+                }
+                else if (randomPiece == TypeEtat.S)
+                {
+                    toutesImagesVisuelles[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]].BackColor = Color.Red;
+                }
+                else // Bloc Z
+                {
+                    toutesImagesVisuelles[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]].BackColor = Color.Pink;
                 }
             }
+        }
 
-
-
+        void blocDescend()
+        {
+            for (int i = 0; i < blocActifY.Length - 1; i++)
+            {
+                if (tableauEtats[ligneCourante + blocActifY[i + 1], colonneCourante + blocActifX[i]] == TypeEtat.GELE)
+                {
+                    tableauEtats[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]] = tableauEtats[ligneCourante + 1 + blocActifY[i], colonneCourante + 1 + blocActifX[i]];
+                }
+            }
         }
 
 
         // <scloutier>
-        int GenererPieceAleatoire()
+        TypeEtat GenererPieceAleatoire()
         {
             Random rnd = new Random();
-            int randomPiece = rnd.Next(2, 2);
+            TypeEtat randomPiece = (TypeEtat)rnd.Next(2, 9);
 
-            if (randomPiece == 2) //Si bloc carré
+            if (randomPiece == TypeEtat.CARRE) //Si bloc carré
             {
                 //PositionY
-                blocActifY[0] = (int)TypeEtat.CARRE;
-                blocActifY[0] = (int)TypeEtat.CARRE;
-                blocActifY[1] = (int)TypeEtat.CARRE;
-                blocActifY[1] = (int)TypeEtat.CARRE;
+                blocActifY[0] = 0;
+                blocActifY[1] = 0;
+                blocActifY[2] = 1;
+                blocActifY[3] = 1;
                 //PositionX
-                blocActifX[0] = (int)TypeEtat.CARRE;
-                blocActifX[1] = (int)TypeEtat.CARRE;
-                blocActifX[0] = (int)TypeEtat.CARRE;
-                blocActifX[1] = (int)TypeEtat.CARRE;
+                blocActifX[0] = 0;
+                blocActifX[1] = 1;
+                blocActifX[2] = 0;
+                blocActifX[3] = 1;
             }
-            else if (randomPiece == 3) //Si bloc ligne
+            else if (randomPiece == TypeEtat.LIGNE) //Si bloc ligne
             {
                 //PositionY
-                blocActifY[0] = (int)TypeEtat.LIGNE;
-                blocActifY[0] = (int)TypeEtat.LIGNE;
-                blocActifY[0] = (int)TypeEtat.LIGNE;
-                blocActifY[0] = (int)TypeEtat.LIGNE;
+                blocActifY[0] = 0;
+                blocActifY[1] = 0;
+                blocActifY[2] = 0;
+                blocActifY[3] = 0;
                 //PositionX
-                blocActifX[0] = (int)TypeEtat.LIGNE;
-                blocActifX[1] = (int)TypeEtat.LIGNE;
-                blocActifX[2] = (int)TypeEtat.LIGNE;
-                blocActifX[3] = (int)TypeEtat.LIGNE;
+                blocActifX[0] = 0;
+                blocActifX[1] = 1;
+                blocActifX[2] = 2;
+                blocActifX[3] = 3;
             }
-            else if (randomPiece == 4) //Si bloc T
-            {
-                //PositionY
-                blocActifY[0] = (int)TypeEtat.T;
-                blocActifY[1] = (int)TypeEtat.T;
-                blocActifY[1] = (int)TypeEtat.T;
-                blocActifY[1] = (int)TypeEtat.T;
-                //PositionX
-                blocActifX[1] = (int)TypeEtat.T;
-                blocActifX[0] = (int)TypeEtat.T;
-                blocActifX[1] = (int)TypeEtat.T;
-                blocActifX[2] = (int)TypeEtat.T;
 
-            }
-            else if (randomPiece == 5) //Si bloc S
+            else if (randomPiece == TypeEtat.T) //Si bloc T
             {
                 //PositionY
-                blocActifY[0] = (int)TypeEtat.L;
-                blocActifY[1] = (int)TypeEtat.L;
-                blocActifY[2] = (int)TypeEtat.L;
-                blocActifY[2] = (int)TypeEtat.L;
+                blocActifY[0] = 0;
+                blocActifY[1] = 1;
+                blocActifY[2] = 1;
+                blocActifY[3] = 1;
                 //PositionX
-                blocActifX[0] = (int)TypeEtat.L;
-                blocActifX[0] = (int)TypeEtat.L;
-                blocActifX[0] = (int)TypeEtat.L;
-                blocActifX[1] = (int)TypeEtat.L;
+                blocActifX[0] = 1;
+                blocActifX[1] = 0;
+                blocActifX[2] = 1;
+                blocActifX[3] = 2;
             }
-            else if (randomPiece == 6) //Si bloc L
-            //PositionY
-            {
-                blocActifY[0] = (int)TypeEtat.L;
-                blocActifY[1] = (int)TypeEtat.L;
-                blocActifY[1] = (int)TypeEtat.L;
-                blocActifY[1] = (int)TypeEtat.L;
-                //PositionX
-                blocActifX[2] = (int)TypeEtat.L;
-                blocActifX[0] = (int)TypeEtat.L;
-                blocActifX[1] = (int)TypeEtat.L;
-                blocActifX[2] = (int)TypeEtat.L;
-            }
-            else if (randomPiece == 7) //Si bloc carré
-            //PositionY
-            {
-                blocActifY[0] = (int)TypeEtat.L;
-                blocActifY[1] = (int)TypeEtat.L;
-                blocActifY[1] = (int)TypeEtat.L;
-                blocActifY[2] = (int)TypeEtat.L;
-                //PositionX
-                blocActifX[0] = (int)TypeEtat.L;
-                blocActifX[0] = (int)TypeEtat.L;
-                blocActifX[1] = (int)TypeEtat.L;
-                blocActifX[1] = (int)TypeEtat.L;
-            }
-            else //Si bloc Z
+            else if (randomPiece == TypeEtat.L)
             {
                 //PositionY
-                blocActifY[0] = (int)TypeEtat.L;
-                blocActifY[0] = (int)TypeEtat.L;
-                blocActifY[1] = (int)TypeEtat.L;
-                blocActifY[1] = (int)TypeEtat.L;
+                blocActifY[0] = 0;
+                blocActifY[1] = 1;
+                blocActifY[2] = 2;
+                blocActifY[3] = 2;
                 //PositionX
-                blocActifX[1] = (int)TypeEtat.L;
-                blocActifX[2] = (int)TypeEtat.L;
-                blocActifX[0] = (int)TypeEtat.L;
-                blocActifX[1] = (int)TypeEtat.L;
+                blocActifX[0] = 0;
+                blocActifX[1] = 0;
+                blocActifX[2] = 0;
+                blocActifX[3] = 1;
+            }
+            else if (randomPiece == TypeEtat.J)
+            {
+                //PositionY
+                blocActifY[0] = 0;
+                blocActifY[1] = 1;
+                blocActifY[2] = 2;
+                blocActifY[3] = 2;
+                //PositionX
+                blocActifX[0] = 1;
+                blocActifX[1] = 1;
+                blocActifX[2] = 1;
+                blocActifX[3] = 0;
+            }
+            else if (randomPiece == TypeEtat.S)
+            {
+                //PositionY
+                blocActifY[0] = 1;
+                blocActifY[1] = 1;
+                blocActifY[2] = 0;
+                blocActifY[3] = 0;
+                //PositionX
+                blocActifX[0] = 0;
+                blocActifX[1] = 1;
+                blocActifX[2] = 1;
+                blocActifX[3] = 2;
+            }
+            else // TypeEtat.Z
+            {
+                //PositionY
+                blocActifY[0] = 0;
+                blocActifY[1] = 0;
+                blocActifY[2] = 1;
+                blocActifY[3] = 1;
+                //PositionX
+                blocActifX[0] = 0;
+                blocActifX[1] = 1;
+                blocActifX[2] = 1;
+                blocActifX[3] = 2;
             }
 
             return randomPiece;
         }
+        //</scloutier>j
 
         /// <summary>
         /// 
@@ -255,13 +289,13 @@ namespace TP3
         /// <param name="nbColonnes"></param>
         public void GenererTableauEtat(int nbLignes, int nbColonnes)
         {
-            tableauEtats = new int[nbLignes, nbColonnes];
+            tableauEtats = new TypeEtat[nbLignes, nbColonnes];
 
             for (int i = 0; i < nbLignes; i++)
             {
                 for (int j = 0; j < nbColonnes; j++)
                 {
-                    tableauEtats[i, j] = (int)TypeEtat.NONE; // Initialisation au type -> None
+                    tableauEtats[i, j] = TypeEtat.NONE; // Initialisation au type -> None
                 }
             }
         }
@@ -274,18 +308,46 @@ namespace TP3
             }
         }
 
+        //<aouellet>
         public int VerifierLigne()
         {
-            int nbLigneComplete;
-
+            int nbLigneComplete = 0;
+            bool ligneEstComplete = false;
+            int compteurSiLigneComplete = 0;
             for (int i = 0; i < tableauEtats.GetLength(0); i++)
             {
+
                 for (int j = 0; j < tableauEtats.GetLength(1); j++)
                 {
-                    if (tableauEtats)
+
+
+                    if (tableauEtats[i, j] == TypeEtat.GELE)
+                    {
+                        compteurSiLigneComplete++;
+                    }
+
+                    if (compteurSiLigneComplete == tableauEtats.GetLength(1))
+                    {
+                        ligneEstComplete = true;
+                        compteurSiLigneComplete = 0;
+                    }
+
+
+                    if (ligneEstComplete == true)
+                    {
+                        nbLigneComplete = i;
+                    }
+                    else
+                    {
+                        nbLigneComplete = 0;
+                    }
+
                 }
+                compteurSiLigneComplete = 0;
             }
+            return nbLigneComplete;
         }
+
 
 
         void RotationPiece()
@@ -293,5 +355,29 @@ namespace TP3
 
         }
 
+        void ReinitialiserPictureBox()
+        {
+            for (int i = 0; i < tableauEtats.GetLength(0); i++)
+            {
+                for (int j = 0; j < tableauEtats.GetLength(1); j++)
+                {
+                    toutesImagesVisuelles[i, j].BackColor = Color.Black;
+                }
+            }
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            ReinitialiserPictureBox();
+            ligneCourante = 0;
+            colonneCourante = tableauEtats.GetLength(1) / 2 - 1;
+            GenererTableauEtat(nbLignes, nbColonnes);
+            InitialiserPieceDansTableau();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            blocDescend();
+        }
     }
 }
