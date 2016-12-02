@@ -146,7 +146,7 @@ namespace TP3
         }
 
         // <scloutier>
-        int GenererEtatPiece()
+        int GenererPieceAleatoire()
         {
             Random rnd = new Random();
             int randomPiece = rnd.Next(2, 2);
@@ -200,30 +200,48 @@ namespace TP3
                 blocActifY[2] = (int)TypeEtat.L;
                 //PositionX
                 blocActifX[0] = (int)TypeEtat.L;
+                blocActifX[0] = (int)TypeEtat.L;
+                blocActifX[0] = (int)TypeEtat.L;
                 blocActifX[1] = (int)TypeEtat.L;
-                blocActifX[2] = (int)TypeEtat.L;
-                blocActifX[3] = (int)TypeEtat.L;
             }
             else if (randomPiece == 6) //Si bloc J
             {
                 //PositionY
                 blocActifY[0] = (int)TypeEtat.L;
                 blocActifY[1] = (int)TypeEtat.L;
-                blocActifY[2] = (int)TypeEtat.L;
-                blocActifY[2] = (int)TypeEtat.L;
+                blocActifY[1] = (int)TypeEtat.L;
+                blocActifY[1] = (int)TypeEtat.L;
                 //PositionX
+                blocActifX[2] = (int)TypeEtat.L;
                 blocActifX[0] = (int)TypeEtat.L;
                 blocActifX[1] = (int)TypeEtat.L;
                 blocActifX[2] = (int)TypeEtat.L;
-                blocActifX[3] = (int)TypeEtat.L;
             }
             else if (randomPiece == 7) //Si bloc S
             {
-
+                //PositionY
+                blocActifY[0] = (int)TypeEtat.L;
+                blocActifY[1] = (int)TypeEtat.L;
+                blocActifY[1] = (int)TypeEtat.L;
+                blocActifY[2] = (int)TypeEtat.L;
+                //PositionX
+                blocActifX[0] = (int)TypeEtat.L;
+                blocActifX[0] = (int)TypeEtat.L;
+                blocActifX[1] = (int)TypeEtat.L;
+                blocActifX[1] = (int)TypeEtat.L;
             }
             else //Si bloc Z
             {
-
+                //PositionY
+                blocActifY[0] = (int)TypeEtat.L;
+                blocActifY[0] = (int)TypeEtat.L;
+                blocActifY[1] = (int)TypeEtat.L;
+                blocActifY[1] = (int)TypeEtat.L;
+                //PositionX
+                blocActifX[1] = (int)TypeEtat.L;
+                blocActifX[2] = (int)TypeEtat.L;
+                blocActifX[0] = (int)TypeEtat.L;
+                blocActifX[1] = (int)TypeEtat.L;
             }
 
             return randomPiece;
