@@ -62,6 +62,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.groupBox1.Controls.Add(this.numericUpDown2);
             this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.checkBox1);
@@ -70,7 +71,8 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.lbNbColonnes);
             this.groupBox1.Controls.Add(this.lbNbLignes);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.ForeColor = System.Drawing.Color.Maroon;
+            this.groupBox1.Location = new System.Drawing.Point(3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(301, 150);
             this.groupBox1.TabIndex = 4;
@@ -134,32 +136,44 @@
             // 
             // btnOkConfig
             // 
+            this.btnOkConfig.BackColor = System.Drawing.Color.DarkRed;
+            this.btnOkConfig.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOkConfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOkConfig.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnOkConfig.Location = new System.Drawing.Point(215, 114);
             this.btnOkConfig.Name = "btnOkConfig";
             this.btnOkConfig.Size = new System.Drawing.Size(80, 25);
             this.btnOkConfig.TabIndex = 6;
             this.btnOkConfig.Text = "Ok";
-            this.btnOkConfig.UseVisualStyleBackColor = true;
+            this.btnOkConfig.UseVisualStyleBackColor = false;
             this.btnOkConfig.Click += new System.EventHandler(this.btnOkConfig_Click);
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.DarkRed;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button2.Location = new System.Drawing.Point(111, 114);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(80, 25);
             this.button2.TabIndex = 5;
             this.button2.Text = "Reset";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.DarkRed;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button1.Location = new System.Drawing.Point(7, 114);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 25);
             this.button1.TabIndex = 4;
             this.button1.Text = "Annuler";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormConfiguration
@@ -167,7 +181,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(321, 170);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.ClientSize = new System.Drawing.Size(307, 154);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox1);
             this.Name = "FormConfiguration";

@@ -61,7 +61,7 @@
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableauJeu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -251,6 +251,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Black;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.configurationDuJeuToolStripMenuItem,
@@ -267,8 +268,10 @@
             this.réinitialiséPartieToolStripMenuItem,
             this.toolStripSeparator1,
             this.quittezToolStripMenuItem});
+            this.configurationDuJeuToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.configurationDuJeuToolStripMenuItem.ForeColor = System.Drawing.Color.Maroon;
             this.configurationDuJeuToolStripMenuItem.Name = "configurationDuJeuToolStripMenuItem";
-            this.configurationDuJeuToolStripMenuItem.Size = new System.Drawing.Size(36, 20);
+            this.configurationDuJeuToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.configurationDuJeuToolStripMenuItem.Text = "Jeu";
             this.configurationDuJeuToolStripMenuItem.Click += new System.EventHandler(this.configurationDuJeuToolStripMenuItem_Click);
             // 
@@ -295,8 +298,10 @@
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.configurationToolStripMenuItem});
+            this.optionsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.optionsToolStripMenuItem.ForeColor = System.Drawing.Color.Maroon;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // configurationToolStripMenuItem
@@ -310,6 +315,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(444, 564);
             this.Controls.Add(this.tableauJeu);
             this.Controls.Add(this.menuStrip1);
