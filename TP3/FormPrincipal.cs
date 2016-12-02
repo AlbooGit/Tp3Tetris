@@ -135,7 +135,7 @@ namespace TP3
         {
             for (int i = 0; i < tableauEtats.GetLength(0); i++)
             {
-                for(int j = 0; j < tableauEtats.GetLength(1); j++)
+                for (int j = 0; j < tableauEtats.GetLength(1); j++)
                 {
 
                 }
@@ -153,10 +153,12 @@ namespace TP3
 
             if (randomPiece == 2) //Si bloc carré
             {
+                //PositionY
                 blocActifY[0] = (int)TypeEtat.CARRE;
                 blocActifY[0] = (int)TypeEtat.CARRE;
                 blocActifY[1] = (int)TypeEtat.CARRE;
                 blocActifY[1] = (int)TypeEtat.CARRE;
+                //PositionX
                 blocActifX[0] = (int)TypeEtat.CARRE;
                 blocActifX[1] = (int)TypeEtat.CARRE;
                 blocActifX[0] = (int)TypeEtat.CARRE;
@@ -164,10 +166,12 @@ namespace TP3
             }
             else if (randomPiece == 3) //Si bloc ligne
             {
+                //PositionY
                 blocActifY[0] = (int)TypeEtat.LIGNE;
                 blocActifY[0] = (int)TypeEtat.LIGNE;
                 blocActifY[0] = (int)TypeEtat.LIGNE;
                 blocActifY[0] = (int)TypeEtat.LIGNE;
+                //PositionX
                 blocActifX[0] = (int)TypeEtat.LIGNE;
                 blocActifX[1] = (int)TypeEtat.LIGNE;
                 blocActifX[2] = (int)TypeEtat.LIGNE;
@@ -175,17 +179,49 @@ namespace TP3
             }
             else if (randomPiece == 4) //Si bloc T
             {
+                //PositionY
+                blocActifY[0] = (int)TypeEtat.T;
+                blocActifY[1] = (int)TypeEtat.T;
+                blocActifY[1] = (int)TypeEtat.T;
+                blocActifY[1] = (int)TypeEtat.T;
+                //PositionX
+                blocActifX[1] = (int)TypeEtat.T;
+                blocActifX[0] = (int)TypeEtat.T;
+                blocActifX[1] = (int)TypeEtat.T;
+                blocActifX[2] = (int)TypeEtat.T;
 
             }
             else if (randomPiece == 5) //Si bloc L
             {
-
+                //PositionY
+                blocActifY[0] = (int)TypeEtat.L;
+                blocActifY[1] = (int)TypeEtat.L;
+                blocActifY[2] = (int)TypeEtat.L;
+                blocActifY[2] = (int)TypeEtat.L;
+                //PositionX
+                blocActifX[0] = (int)TypeEtat.L;
+                blocActifX[1] = (int)TypeEtat.L;
+                blocActifX[2] = (int)TypeEtat.L;
+                blocActifX[3] = (int)TypeEtat.L;
             }
             else if (randomPiece == 6) //Si bloc J
             {
+                //PositionY
+                blocActifY[0] = (int)TypeEtat.L;
+                blocActifY[1] = (int)TypeEtat.L;
+                blocActifY[2] = (int)TypeEtat.L;
+                blocActifY[2] = (int)TypeEtat.L;
+                //PositionX
+                blocActifX[0] = (int)TypeEtat.L;
+                blocActifX[1] = (int)TypeEtat.L;
+                blocActifX[2] = (int)TypeEtat.L;
+                blocActifX[3] = (int)TypeEtat.L;
+            }
+            else if (randomPiece == 7) //Si bloc S
+            {
 
             }
-            else //Si bloc S
+            else //Si bloc Z
             {
 
             }
