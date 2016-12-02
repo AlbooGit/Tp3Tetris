@@ -42,5 +42,13 @@ namespace TP3
         {
 
         }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            numericUpDown1.Value = 20;
+            numericUpDown2.Value = 10;
+            principal.InitialiserSurfaceDeJeu(principal.nbLignes = (int)numericUpDown1.Value, principal.nbColonnes = (int)numericUpDown2.Value);
+            principal.GenererTableauEtat(principal.nbLignes = (int)numericUpDown1.Value, principal.nbColonnes = (int)numericUpDown2.Value);
+        }
     }
 }

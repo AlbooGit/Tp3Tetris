@@ -13,9 +13,10 @@ namespace TP3
             InitializeComponent();
         }
 
-        int[,] blocActif = new int[3, 3];
-        int[,] blocActifLigneCarre = new int[4, 4];
-
+        int[] blocActifY = new int[4];
+        int[] blocActifX = new int[4];
+        int[] ligneCourante = new int[4];
+        int[] colonneCourante = new int[4];
 
 
         // Représentation visuelles du jeu en mémoire.
@@ -127,16 +128,24 @@ namespace TP3
         private void réinitialiséPartieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InitialiserSurfaceDeJeu(nbLignes = 20, nbColonnes = 10);
+            GenererTableauEtat(nbLignes = 20, nbColonnes = 10);
         }
 
         void InitialiserPieceDansTableau(int pieceRandom)
         {
-            //for (int i = 0; i < )
+            for (int i = 0; i < tableauEtats.GetLength(0); i++)
+            {
+                for(int j = 0; j < tableauEtats.GetLength(1); j++)
+                {
+
+                }
+            }
 
 
 
         }
 
+        // <scloutier>
         int GenererEtatPiece()
         {
             Random rnd = new Random();
@@ -144,14 +153,25 @@ namespace TP3
 
             if (randomPiece == 2) //Si bloc carré
             {
-                blocActifLigneCarre[0, 0] = (int)TypeEtat.CARRE;
-                blocActifLigneCarre[0, 1] = (int)TypeEtat.CARRE;
-                blocActifLigneCarre[1, 0] = (int)TypeEtat.CARRE;
-                blocActifLigneCarre[1, 1] = (int)TypeEtat.CARRE;
+                blocActifY[0] = (int)TypeEtat.CARRE;
+                blocActifY[0] = (int)TypeEtat.CARRE;
+                blocActifY[1] = (int)TypeEtat.CARRE;
+                blocActifY[1] = (int)TypeEtat.CARRE;
+                blocActifX[0] = (int)TypeEtat.CARRE;
+                blocActifX[1] = (int)TypeEtat.CARRE;
+                blocActifX[0] = (int)TypeEtat.CARRE;
+                blocActifX[1] = (int)TypeEtat.CARRE;
             }
             else if (randomPiece == 3) //Si bloc ligne
             {
-
+                blocActifY[0] = (int)TypeEtat.LIGNE;
+                blocActifY[0] = (int)TypeEtat.LIGNE;
+                blocActifY[0] = (int)TypeEtat.LIGNE;
+                blocActifY[0] = (int)TypeEtat.LIGNE;
+                blocActifX[0] = (int)TypeEtat.LIGNE;
+                blocActifX[1] = (int)TypeEtat.LIGNE;
+                blocActifX[2] = (int)TypeEtat.LIGNE;
+                blocActifX[3] = (int)TypeEtat.LIGNE;
             }
             else if (randomPiece == 4) //Si bloc T
             {
@@ -173,6 +193,8 @@ namespace TP3
             return randomPiece;
         }
 
+        //<scloutier>
+
         /// <summary>
         /// 
         /// </summary>
@@ -189,6 +211,11 @@ namespace TP3
                     tableauEtats[i, j] = (int)TypeEtat.NONE; // Initialisation au type -> None
                 }
             }
+        }
+
+        void RotationPiece()
+        {
+
         }
 
     }
