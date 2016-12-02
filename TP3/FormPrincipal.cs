@@ -169,13 +169,7 @@ namespace TP3
 
         void blocDescend()
         {
-            for (int i = 0; i < blocActifY.Length - 1; i++)
-            {
-                if (tableauEtats[ligneCourante + blocActifY[i + 1], colonneCourante + blocActifX[i]] == TypeEtat.GELE)
-                {
-                    tableauEtats[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]] = tableauEtats[ligneCourante + 1 + blocActifY[i], colonneCourante + 1 + blocActifX[i]];
-                }
-            }
+            
         }
 
 
@@ -378,6 +372,22 @@ namespace TP3
         private void button1_Click(object sender, EventArgs e)
         {
             blocDescend();
+        }
+
+        private void KeyPressDeplacement(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+            {
+
+            }
+            else if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+            {
+
+            }
+            else if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+            {
+
+            }
         }
     }
 }
