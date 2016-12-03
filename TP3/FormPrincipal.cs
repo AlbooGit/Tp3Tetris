@@ -16,7 +16,7 @@ namespace TP3
         int[] blocActifX = new int[4];
         int ligneCourante = 0;
         int colonneCourante = 0;
-
+        Deplacement mouvement = 0;
 
         // Représentation visuelles du jeu en mémoire.
         PictureBox[,] toutesImagesVisuelles = null;
@@ -126,6 +126,7 @@ namespace TP3
 
         private void réinitialiséPartieToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            btnStart.Enabled = true;
             InitialiserSurfaceDeJeu(nbLignes = 20, nbColonnes = 10);
             GenererTableauEtat(nbLignes = 20, nbColonnes = 10);
         }
@@ -169,7 +170,7 @@ namespace TP3
 
         void blocDescend()
         {
-            
+
         }
 
 
@@ -362,11 +363,14 @@ namespace TP3
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            btnStart.Enabled = false;
             ReinitialiserPictureBox();
             ligneCourante = 0;
             colonneCourante = tableauEtats.GetLength(1) / 2 - 1;
             GenererTableauEtat(nbLignes, nbColonnes);
             InitialiserPieceDansTableau();
+            mouvementDescendre(mouvement);
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -374,19 +378,44 @@ namespace TP3
             blocDescend();
         }
 
+        enum Deplacement
+        {
+            DESCENDRE,
+            DROITE,
+            GAUCHE,
+            ROTATION_HORAIRE,
+            ROTATION_ANTIHORAIRE,
+            MONTER
+        }
+
+
+
         private void KeyPressDeplacement(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
-            {
 
+            if(e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+            {
+                ligneCourante++;
             }
             else if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
             {
-
+                mouvement = Deplacement.DROITE;
             }
             else if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
             {
+                mouvement = Deplacement.GAUCHE;
+            }
+            else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
+            {
+                mouvement = Deplacement.MONTER;
+            }
+        }
 
+        void mouvementDescendre(Deplacement sens)
+        {
+            if (sens == Deplacement.DESCENDRE)
+            {
+                ligneCourante++;
             }
         }
     }
