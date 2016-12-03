@@ -442,15 +442,21 @@ namespace TP3
             }
             else if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
             {
-                mouvement = Deplacement.DROITE;
+                colonneCourante++;
+                ReinitialiserPictureBox();
+                InitialiserPieceDansTableau(pieceTableau);
             }
             else if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
             {
-                mouvement = Deplacement.GAUCHE;
+                colonneCourante--;
+                ReinitialiserPictureBox();
+                InitialiserPieceDansTableau(pieceTableau);
             }
             else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
             {
-                mouvement = Deplacement.MONTER;
+                ligneCourante--;
+                ReinitialiserPictureBox();
+                InitialiserPieceDansTableau(pieceTableau);
             }
         }
         //</scloutier>
