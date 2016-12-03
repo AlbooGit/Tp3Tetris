@@ -32,6 +32,7 @@ namespace TP3
         public int nbColonnes = 10;
         TypeEtat[,] tableauEtats = new TypeEtat[20, 10];
         TypeEtat pieceTableau;
+        bool partieEnCours = false;
 
         #endregion
 
@@ -203,7 +204,14 @@ namespace TP3
 
         void blocDescend()
         {
+            while (partieEnCours == true)
+            {
+                if (partieEnCours == true)
+                {
 
+                }
+            }
+            partieEnCours = false;
         }
 
         #region GenererPieceAleatoire
@@ -410,6 +418,7 @@ namespace TP3
         //<scloutier>
         private void btnStart_Click(object sender, EventArgs e)
         {
+            partieEnCours = true;
             btnStart.Enabled = false;
             ReinitialiserPictureBox();
             ligneCourante = 0;
@@ -417,7 +426,7 @@ namespace TP3
             GenererTableauEtat(nbLignes, nbColonnes);
             pieceTableau = GenererPieceAleatoire();
             InitialiserPieceDansTableau(pieceTableau);
-            
+
         }
         //</scloutier>
         #endregion
@@ -441,7 +450,7 @@ namespace TP3
         private void KeyPressDeplacement(object sender, KeyEventArgs e)
         {
 
-            if(e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
             {
                 ligneCourante++;
                 ReinitialiserPictureBox();
