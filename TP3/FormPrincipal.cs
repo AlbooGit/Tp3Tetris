@@ -12,18 +12,23 @@ namespace TP3
             InitializeComponent();
         }
 
+        #region Variable Partagées
+
         int[] blocActifY = new int[4];
         int[] blocActifX = new int[4];
         int ligneCourante = 0;
         int colonneCourante = 0;
         Deplacement mouvement = 0;
-
         // Représentation visuelles du jeu en mémoire.
         PictureBox[,] toutesImagesVisuelles = null;
         public int nbLignes = 20;
         public int nbColonnes = 10;
         TypeEtat[,] tableauEtats = new TypeEtat[20, 10];
+        TypeEtat pieceTableau;
 
+        #endregion
+
+        #region frmLoad
         /// <summary>
         /// Gestionnaire de l'événement se produisant lors du premier affichage 
         /// du formulaire principal.
@@ -36,7 +41,9 @@ namespace TP3
             ExecuterTestsUnitaires();
             InitialiserSurfaceDeJeu(nbLignes, nbColonnes);
         }
+        #endregion
 
+        #region InitialiserSurFaceDeJeu
         public void InitialiserSurfaceDeJeu(int nbLignes, int nbCols)
         {
             // Création d'une surface de jeu 10 colonnes x 20 lignes
@@ -67,8 +74,9 @@ namespace TP3
                 }
             }
         }
+        #endregion
 
-
+        #region TypeEtat
         enum TypeEtat
         {
             NONE,
@@ -81,6 +89,7 @@ namespace TP3
             S,
             Z
         }
+        #endregion
 
         #region Code à développer
         /// <summary>
@@ -106,11 +115,15 @@ namespace TP3
 
         #endregion
 
+        #region configDuJeuToolStripMenuItem_Click
         private void configurationDuJeuToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
+        #endregion
 
+        #region configurationToolStripMenuItem_Clicl
+        //<scloutier>
         public void configurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormConfiguration config = new FormConfiguration(this);
@@ -118,22 +131,33 @@ namespace TP3
             config.numericUpDown2.Value = nbColonnes;
             config.ShowDialog();
         }
+        //</scloutier>
+        #endregion
 
+        #region quittezToolStripMenuItem_Click
+        //<scloutier>
         private void quittezToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+        //</scloutier>
+        #endregion
 
+        #region réinitialiséPartieToolStripMenuItem_Click
+        //<scloutier>
         private void réinitialiséPartieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             btnStart.Enabled = true;
             InitialiserSurfaceDeJeu(nbLignes = 20, nbColonnes = 10);
             GenererTableauEtat(nbLignes = 20, nbColonnes = 10);
         }
+        //</scloutier>
+        #endregion
 
-        void InitialiserPieceDansTableau()
+        #region InitialiserPieceDansTableau
+        //<scloutier>
+        void InitialiserPieceDansTableau(TypeEtat randomPiece)
         {
-            TypeEtat randomPiece = GenererPieceAleatoire();
             for (int i = 0; i < blocActifY.Length; i++)
             {
                 tableauEtats[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]] = randomPiece;
@@ -167,13 +191,15 @@ namespace TP3
                 }
             }
         }
+        //</scloutier>
+        #endregion
 
         void blocDescend()
         {
 
         }
 
-
+        #region GenererPieceAleatoire
         // <scloutier>
         TypeEtat GenererPieceAleatoire()
         {
@@ -275,8 +301,11 @@ namespace TP3
 
             return randomPiece;
         }
-        //</scloutier>j
+        //</scloutier>
+        #endregion
 
+        #region GenererTableauEtat
+        //<scloutier>
         /// <summary>
         /// 
         /// </summary>
@@ -294,7 +323,10 @@ namespace TP3
                 }
             }
         }
+        //</scloutier>
+        #endregion
 
+        #region EffacerLigne
         public void EffacerLigne(int nbDeLaLigneComplete)
         {
             for (int i = 0; i < tableauEtats.GetLength(1); i++)
@@ -302,7 +334,9 @@ namespace TP3
                 tableauEtats[nbDeLaLigneComplete, i] = (int)TypeEtat.NONE;
             }
         }
+        #endregion
 
+        #region VerifierLigne
         //<aouellet>
         public int VerifierLigne()
         {
@@ -342,7 +376,7 @@ namespace TP3
             }
             return nbLigneComplete;
         }
-
+        #endregion
 
 
         void RotationPiece()
@@ -350,6 +384,8 @@ namespace TP3
 
         }
 
+        #region ReinitialiserPictureBox
+        ////<scloutier>
         void ReinitialiserPictureBox()
         {
             for (int i = 0; i < tableauEtats.GetLength(0); i++)
@@ -360,7 +396,11 @@ namespace TP3
                 }
             }
         }
+        //</scloutier>
+        #endregion
 
+        #region btnStart_Click
+        //<scloutier>
         private void btnStart_Click(object sender, EventArgs e)
         {
             btnStart.Enabled = false;
@@ -368,16 +408,15 @@ namespace TP3
             ligneCourante = 0;
             colonneCourante = tableauEtats.GetLength(1) / 2 - 1;
             GenererTableauEtat(nbLignes, nbColonnes);
-            InitialiserPieceDansTableau();
-            mouvementDescendre(mouvement);
+            pieceTableau = GenererPieceAleatoire();
+            InitialiserPieceDansTableau(pieceTableau);
             
         }
+        //</scloutier>
+        #endregion
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            blocDescend();
-        }
-
+        #region Deplacement
+        //<scloutier>
         enum Deplacement
         {
             DESCENDRE,
@@ -387,15 +426,19 @@ namespace TP3
             ROTATION_ANTIHORAIRE,
             MONTER
         }
+        //</scloutier>
+        #endregion
 
-
-
+        #region KeyPressDeplacement
+        //<scloutier>
         private void KeyPressDeplacement(object sender, KeyEventArgs e)
         {
 
             if(e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
             {
                 ligneCourante++;
+                ReinitialiserPictureBox();
+                InitialiserPieceDansTableau(pieceTableau);
             }
             else if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
             {
@@ -410,13 +453,21 @@ namespace TP3
                 mouvement = Deplacement.MONTER;
             }
         }
+        //</scloutier>
+        #endregion
 
+        #region mouvementDescendre
+        //<scloutier>
         void mouvementDescendre(Deplacement sens)
         {
             if (sens == Deplacement.DESCENDRE)
             {
                 ligneCourante++;
+                ReinitialiserPictureBox();
+                InitialiserPieceDansTableau(pieceTableau);
             }
         }
+        //</scloutier>
+        #endregion
     }
 }
