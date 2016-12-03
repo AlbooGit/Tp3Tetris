@@ -1,4 +1,11 @@
-﻿using System;
+﻿// Jeu de Tetris
+// Programmé par Samuel Cloutier & Albert Ouellet
+// Le jeu consiste à placer les blocs de façons à créer des lignes qui vont disparaitre
+// pour gagner des points. Le but du jeu est de faire le plus de point possible.
+// La partie se termine lorsque le joueur n'est plus capable de placer les blocs
+// au point que le bloc va se geler dans le "spawn" du bloc.
+//
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
