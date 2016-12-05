@@ -452,6 +452,7 @@ namespace TP3
     {
       if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
       {
+        mouvement = Deplacement.DESCENDRE;
         VerifierDeplacement(mouvement);
         if (deplacementPossible == true)
         {
@@ -462,15 +463,25 @@ namespace TP3
       }
       else if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
       {
-        colonneCourante++;
-        ReinitialiserPictureBox();
-        InitialiserPieceDansTableau(pieceTableau);
+        mouvement = Deplacement.DROITE;
+        VerifierDeplacement(mouvement);
+        if (deplacementPossible == true)
+        {
+          colonneCourante++;
+          ReinitialiserPictureBox();
+          InitialiserPieceDansTableau(pieceTableau);
+        }
       }
       else if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
       {
-        colonneCourante--;
-        ReinitialiserPictureBox();
-        InitialiserPieceDansTableau(pieceTableau);
+        mouvement = Deplacement.GAUCHE;
+        VerifierDeplacement(mouvement);
+        if (deplacementPossible == true)
+        {
+          colonneCourante--;
+          ReinitialiserPictureBox();
+          InitialiserPieceDansTableau(pieceTableau);
+        }
       }
       else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
       {
@@ -506,30 +517,57 @@ namespace TP3
       {
         for (int i = 0; i < blocActifY.Length; i++)
         {
-            if ((ligneCourante + 1 + blocActifY[i] <= tableauEtats.GetLength(0) - 1) &&
-                   (int)tableauEtats[ligneCourante + 1 + blocActifY[i], colonneCourante + blocActifX[i]] <= tableauEtats.GetLength(0) - 1)
-            {
-              deplacementPossible = true;
-            }
-            else
-            {
-              deplacementPossible = false;
-              GeleBlocs();
-              return deplacementPossible;
-            }
+          if ((ligneCourante + 1 + blocActifY[i] <= tableauEtats.GetLength(0) - 1) &&
+                 (int)tableauEtats[ligneCourante + 1 + blocActifY[i], colonneCourante + blocActifX[i]] <= tableauEtats.GetLength(0) - 1 
+                      && tableauEtats[ligneCourante + 1 + blocActifY[i], colonneCourante + blocActifX[i]] != TypeEtat.GELE)
+          {
+            deplacementPossible = true;
+          }
+          else
+          {
+            deplacementPossible = false;
+            GeleBlocs();
+            return deplacementPossible;
+          }
         }
       }
       else if (sens == Deplacement.GAUCHE)
       {
-        if (colonneCourante - 1 >= 0 && tableauEtats[ligneCourante, colonneCourante - 1] != TypeEtat.GELE)
+        for (int j = 0; j < blocActifX.Length; j++)
         {
-          deplacementPossible = true;
-        }
-        else if (sens == Deplacement.DROITE)
-        {
-          if (colonneCourante + 1 >= tableauEtats.GetLength(1) && tableauEtats[ligneCourante, colonneCourante + 1] != TypeEtat.GELE)
+          if (colonneCourante - 1 + blocActifX[j] < 0 )
           {
+            deplacementPossible = false;
+            return false;
+          }
+          else if (tableauEtats[ligneCourante + blocActifY[j], colonneCourante - 1 + blocActifX[j]] == TypeEtat.GELE)
+          {
+            deplacementPossible = false;
+            return false;
+          }
+          else
+          {
+            deplacementPossible = true;
+          }
+        }
+      }
 
+      else if (sens == Deplacement.DROITE)
+      {
+        for (int j = 0; j < blocActifX.Length; j++)
+        {
+          if (colonneCourante + 1 + blocActifX[j] >= tableauEtats.GetLength(1)) 
+          {
+            deplacementPossible = false;
+            return false;
+          }
+          else if (tableauEtats[ligneCourante + blocActifY[j], colonneCourante + 1 + blocActifX[j]] == TypeEtat.GELE)
+          {
+            deplacementPossible = false;
+            return false;
+          }
+          else
+          {
             deplacementPossible = true;
           }
         }
