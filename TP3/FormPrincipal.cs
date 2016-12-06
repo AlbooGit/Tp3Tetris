@@ -211,10 +211,22 @@ namespace TP3
       {
         if (partieEnCours == true)
         {
+          timer1.Start();
+          mouvement = Deplacement.DESCENDRE;
+          VerifierDeplacement(mouvement);
+          if (deplacementPossible == true)
+          {
+            ligneCourante++;
+            EnleverAncienBloc();
+            InitialiserPieceDansTableau(pieceTableau);
+
+          }
+
 
         }
       }
       partieEnCours = false;
+      timer1.Stop();
     }
 
     #region GenererPieceAleatoire
@@ -486,8 +498,8 @@ namespace TP3
         VerifierDeplacement(mouvement);
         if (deplacementPossible == true)
         {
-          colonneCourante--;
           EnleverAncienBloc();
+          colonneCourante--;
           InitialiserPieceDansTableau(pieceTableau);
         }
       }
@@ -621,7 +633,7 @@ namespace TP3
         tableauEtats[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]] = TypeEtat.GELE;
         toutesImagesVisuelles[ligneCourante + blocActifY[i], colonneCourante + blocActifX[i]].BackColor = Color.Gray;
       }
-      GenererPieceAleatoire();                              //Il faudrait possiblement bouger ce code
+      pieceTableau = GenererPieceAleatoire();                              //Il faudrait possiblement bouger ce code
       ligneCourante = 0;                                    
       colonneCourante = tableauEtats.GetLength(1) / 2 - 1;
       InitialiserPieceDansTableau(pieceTableau);
@@ -640,6 +652,19 @@ namespace TP3
           }
         }
       }
+    }
+
+    private void timer1_Tick(object sender, EventArgs e)
+    {
+      timer1.Start();
+      mouvement = Deplacement.DESCENDRE;
+      VerifierDeplacement(mouvement);
+      if (deplacementPossible == true)
+      {
+        ligneCourante++;
+        EnleverAncienBloc();
+        InitialiserPieceDansTableau(pieceTableau);
+       }
     }
   }
 }
