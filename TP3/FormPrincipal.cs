@@ -23,8 +23,8 @@ namespace TP3
 
         int[] blocActifY = new int[4];
         int[] blocActifX = new int[4];
-        int[] NouveauBlocActifY = new int[4];
-        int[] NouveauBlocActifX = new int[4];
+        int[] nouveauBlocActifY = new int[4];
+        int[] nouveauBlocActifX = new int[4];
         int ligneCourante = 0;
         int colonneCourante = 0;
         Deplacement mouvement = 0;
@@ -36,7 +36,6 @@ namespace TP3
         TypeEtat pieceTableau;
         bool partieEnCours = false;
         bool deplacementPossible = false;
-        
 
         #endregion
 
@@ -456,6 +455,7 @@ namespace TP3
             if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
             {
                 mouvement = Deplacement.DESCENDRE;
+                deplacementPossible = false;
                 VerifierDeplacement(mouvement);
                 if (deplacementPossible == true)
                 {
@@ -467,6 +467,7 @@ namespace TP3
             else if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
             {
                 mouvement = Deplacement.DROITE;
+                deplacementPossible = false;
                 VerifierDeplacement(mouvement);
                 if (deplacementPossible == true)
                 {
@@ -478,6 +479,7 @@ namespace TP3
             else if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
             {
                 mouvement = Deplacement.GAUCHE;
+                deplacementPossible = false;
                 VerifierDeplacement(mouvement);
                 if (deplacementPossible == true)
                 {
@@ -486,18 +488,21 @@ namespace TP3
                     InitialiserPieceDansTableau(pieceTableau);
                 }
             }
-            else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
-            {
-                ligneCourante--;
-                ReinitialiserPictureBox();
-                InitialiserPieceDansTableau(pieceTableau);
-            }
             else if (e.KeyCode == Keys.E)
             {
+                
                 mouvement = Deplacement.ROTATION_HORAIRE;
+                
                 VerifierDeplacement(mouvement);
                 if (deplacementPossible == true)
                 {
+                    int temp = 0;
+                    for (int j = 0; j < blocActifX.Length; j++)
+                    {
+                        temp = -blocActifY[j];
+                        blocActifY[j] = blocActifX[j];
+                        blocActifX[j] = temp;
+                    }
                     ReinitialiserPictureBox();
                     InitialiserPieceDansTableau(pieceTableau);
                 }
@@ -506,8 +511,26 @@ namespace TP3
         //</scloutier>
         #endregion
 
-      
-        void VerifierDeplacement(Deplacement sens)
+        #region mouvementDescendre
+        //<scloutier>
+        void mouvementBloc(Deplacement sens)
+        {
+            bool peutDeplacer = VerifierDeplacement(sens);
+            if (sens == Deplacement.DESCENDRE && peutDeplacer == true)
+            {
+                ligneCourante++;
+                ReinitialiserPictureBox();
+                InitialiserPieceDansTableau(pieceTableau);
+            }
+            else
+            {
+                GeleBlocs();
+            }
+        }
+        //</scloutier>
+        #endregion
+
+        bool VerifierDeplacement(Deplacement sens)
         {
             if (sens == Deplacement.DESCENDRE)
             {
@@ -523,6 +546,7 @@ namespace TP3
                     {
                         deplacementPossible = false;
                         GeleBlocs();
+                        return deplacementPossible;
                     }
                 }
             }
@@ -533,10 +557,12 @@ namespace TP3
                     if (colonneCourante - 1 + blocActifX[j] < 0)
                     {
                         deplacementPossible = false;
+                        return false;
                     }
                     else if (tableauEtats[ligneCourante + blocActifY[j], colonneCourante - 1 + blocActifX[j]] == TypeEtat.GELE)
                     {
                         deplacementPossible = false;
+                        return false;
                     }
                     else
                     {
@@ -552,10 +578,12 @@ namespace TP3
                     if (colonneCourante + 1 + blocActifX[j] >= tableauEtats.GetLength(1))
                     {
                         deplacementPossible = false;
+                        return false;
                     }
                     else if (tableauEtats[ligneCourante + blocActifY[j], colonneCourante + 1 + blocActifX[j]] == TypeEtat.GELE)
                     {
                         deplacementPossible = false;
+                        return false;
                     }
                     else
                     {
@@ -565,26 +593,24 @@ namespace TP3
             }
             else if (sens == Deplacement.ROTATION_HORAIRE)
             {
-                for (int i = 0; i < blocActifY.Length; i++)
+                for (int i = 0; i < blocActifX.Length; i++)
                 {
-                    for (int j = 0; j < blocActifX.Length; j++)
+                    nouveauBlocActifX[i] = - blocActifY[i];
+                    nouveauBlocActifY[i] = blocActifX[i];
+
+                    if (colonneCourante - blocActifY[i] > tableauEtats.GetLength(1) - 1 || colonneCourante - blocActifY[i] < 0 || ligneCourante + blocActifX[i] > tableauEtats.GetLength(0) - 1 || ligneCourante + blocActifX[i] < 0)
                     {
-                        NouveauBlocActifX[j] = blocActifY[i];
-                        NouveauBlocActifY[i] = blocActifX[-j];
-                        
-                        if (tableauEtats[ligneCourante + blocActifX[blocActifY[j]], colonneCourante - blocActifY[- j]] == TypeEtat.GELE)
-                        {
-                            deplacementPossible = false;
-                        }
-                        else
-                        {
-                            deplacementPossible = true;
-                        }
+                        deplacementPossible = false;
+                    }
+                    if (tableauEtats[ligneCourante + blocActifX[i], colonneCourante - blocActifY[i]] == TypeEtat.GELE)
+                    {
+                        deplacementPossible = false;
                     }
                 }
             }
-
+            return deplacementPossible;
         }
+
         void GeleBlocs()
         {
             for (int i = 0; i < blocActifY.Length; i++)
