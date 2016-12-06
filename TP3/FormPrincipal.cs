@@ -161,6 +161,7 @@ namespace TP3
             btnStart.Enabled = true;
             InitialiserSurfaceDeJeu(nbLignes = 20, nbColonnes = 10);
             GenererTableauEtat(nbLignes = 20, nbColonnes = 10);
+            ReinitialiserPictureBox();
         }
         //</scloutier>
         #endregion
