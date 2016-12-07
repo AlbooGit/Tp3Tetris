@@ -6,6 +6,7 @@
 // au point que le bloc va se geler dans le "spawn" du bloc.
 //
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -351,48 +352,38 @@ namespace TP3
 
     #region VerifierLigne
     //<aouellet>
-    public int VerifierLigne()
+    public List<int> VerifierLigne()
     {
       int nbLigneComplete = 0;
       bool ligneEstComplete = false;
       int compteurSiLigneComplete = 0;
-
+      List<int> lignesCompleter = new List<int>();
       for (int i = 0; i < tableauEtats.GetLength(0); i++)
       {
-
         for (int j = 0; j < tableauEtats.GetLength(1); j++)
-
         {
           if (tableauEtats[i, j] == TypeEtat.GELE)
-
           {
             compteurSiLigneComplete++;
-
             if (compteurSiLigneComplete == tableauEtats.GetLength(1))
-
             {
-
               ligneEstComplete = true;
               compteurSiLigneComplete = 0;
               if (ligneEstComplete == true)
-
               {
-
                 nbLigneComplete = i;
-
+                lignesCompleter.Add(i);
               }
-
             }
           }
           else
           {
             nbLigneComplete = 0;
           }
-
         }
         compteurSiLigneComplete = 0;
       }
-      return nbLigneComplete;
+      return lignesCompleter;
     }
     #endregion
 
@@ -637,7 +628,7 @@ namespace TP3
           }
         }
       }
-        return deplacementPossible;
+      return deplacementPossible;
     }
 
     void GeleBlocs()
@@ -677,11 +668,12 @@ namespace TP3
         EnleverAncienBloc();
         ligneCourante++;
         InitialiserPieceDansTableau(pieceTableau);
-        int nbLigneADecaler = VerifierLigne();
-        if (nbLigneADecaler != 0)
+        List<int> nbLigneADecaler = VerifierLigne();
+        foreach (int ligne in nbLigneADecaler)
         {
-          EffacerLigne(nbLigneADecaler);
-          DecalerLignes(nbLigneADecaler);
+          EffacerLigne(ligne);
+          DecalerLignes(ligne);
+          DessinerTableau();
         }
 
       }
@@ -703,17 +695,67 @@ namespace TP3
 
     void DecalerLignes(int nbLigneADecaler)
     {
-      for (int i = nbLigneADecaler; i < tableauEtats.GetLength(0) - nbLigneADecaler; i++)
+      for (int i = nbLigneADecaler; i > 0; i--)
       {
         for (int j = 0; j < tableauEtats.GetLength(1); j++)
         {
-          tableauEtats[i, j] = tableauEtats[i - 1, j];
+          if (tableauEtats[i, j] == TypeEtat.GELE || tableauEtats[i, j] == TypeEtat.NONE)
+          {
+            tableauEtats[i, j] = tableauEtats[i - 1, j];
+          }
         }
       }
       for (int x = 0; x < tableauEtats.GetLength(1); x++)
       {
         tableauEtats[0, x] = TypeEtat.NONE;
       }
+    }
+
+    void DessinerTableau()
+    {
+      for (int i = 0; i < tableauEtats.GetLength(0); i++)
+      {
+        for (int j = 0; j < tableauEtats.GetLength(1); j++)
+        {
+          if (tableauEtats[i, j] == TypeEtat.CARRE)
+          {
+            toutesImagesVisuelles[i, j].BackColor = Color.Yellow;
+          }
+          else if (tableauEtats[i, j] == TypeEtat.NONE)
+          {
+            toutesImagesVisuelles[i, j].BackColor = Color.Black;
+          }
+          else if (tableauEtats[i, j] == TypeEtat.GELE)
+          {
+            toutesImagesVisuelles[i, j].BackColor = Color.Gray;
+          }
+          else if (tableauEtats[i, j] == TypeEtat.LIGNE)
+          {
+            toutesImagesVisuelles[i, j].BackColor = Color.Blue;
+          }
+          else if (tableauEtats[i, j] == TypeEtat.S)
+          {
+            toutesImagesVisuelles[i, j].BackColor = Color.Red;
+          }
+          else if (tableauEtats[i, j] == TypeEtat.Z)
+          {
+            toutesImagesVisuelles[i, j].BackColor = Color.Pink;
+          }
+          else if (tableauEtats[i, j] == TypeEtat.J)
+          {
+            toutesImagesVisuelles[i, j].BackColor = Color.OrangeRed;
+          }
+          else if (tableauEtats[i, j] == TypeEtat.L)
+          {
+            toutesImagesVisuelles[i, j].BackColor = Color.Green;
+          }
+          else
+          {
+            toutesImagesVisuelles[i, j].BackColor = Color.Purple;
+          }
+        }
+      }
+
     }
   }
 }
