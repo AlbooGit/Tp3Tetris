@@ -7,8 +7,10 @@
 //
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+
 
 namespace TP3
 {
@@ -39,7 +41,7 @@ namespace TP3
     bool partieEnCours = false;
     bool deplacementPossible = false;
     public int nbDeSeconde = 0;
-
+    int score = 0;
     #endregion
 
     #region frmLoad
@@ -116,15 +118,240 @@ namespace TP3
     }
 
     // A renommer et commenter!
-    void ExecuterTestABC()
+    void ExecuterTestRetirerLigneA()
     {
-      // Mise en place des données du test
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0), i] = TypeEtat.GELE;
+      }
+      List<int> lignesCompleterTest = new List<int>();
+      lignesCompleterTest = VerifierLigne();
+      foreach (int line in lignesCompleterTest)
+      {
+        EffacerLigne(line);
+        DecalerLignes(line);
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0), i] == TypeEtat.NONE, "Erreur, n'a pas été effacé correctement.");
+      }
 
-      // Exécuter de la méthode à tester
+      btnStart.Enabled = true;
+      InitialiserSurfaceDeJeu(nbLignes = 20, nbColonnes = 10);
+      GenererTableauEtat(nbLignes = 20, nbColonnes = 10);
+      ReinitialiserPictureBox();
+      ligneCourante = 0;
+      colonneCourante = tableauEtats.GetLength(1) / 2 - 1;
+      timer1.Stop();
+      score = 0;
+      GererScore();
+    }
 
-      // Validation des résultats
+    void ExecuterTestRetirerLigneB()
+    {
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0), i] = TypeEtat.GELE;
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0) - 1, i] = TypeEtat.LIGNE;
+      }
 
-      // Clean-up
+      List<int> lignesCompleterTest = new List<int>();
+      lignesCompleterTest = VerifierLigne();
+      foreach (int line in lignesCompleterTest)
+      {
+        EffacerLigne(line);
+        DecalerLignes(line);
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0), i] == TypeEtat.LIGNE, "Erreur, n'a pas été effacé correctement / mauvais décalage.");
+      }
+
+      btnStart.Enabled = true;
+      InitialiserSurfaceDeJeu(nbLignes = 20, nbColonnes = 10);
+      GenererTableauEtat(nbLignes = 20, nbColonnes = 10);
+      ReinitialiserPictureBox();
+      ligneCourante = 0;
+      colonneCourante = tableauEtats.GetLength(1) / 2 - 1;
+      timer1.Stop();
+      score = 0;
+      GererScore();
+    }
+
+    void ExecuterTestRetirerLigneC()
+    {
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0), i] = TypeEtat.GELE;
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0) - 1, i] = TypeEtat.GELE;
+      }
+      List<int> lignesCompleterTest = new List<int>();
+      lignesCompleterTest = VerifierLigne();
+      foreach (int line in lignesCompleterTest)
+      {
+        EffacerLigne(line);
+        DecalerLignes(line);
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0), i] == TypeEtat.NONE, "Erreur, n'a pas été effacé correctement.");
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0) - 1, i] == TypeEtat.NONE, "Erreur, n'a pas été effacé correctement.");
+      }
+
+      btnStart.Enabled = true;
+      InitialiserSurfaceDeJeu(nbLignes = 20, nbColonnes = 10);
+      GenererTableauEtat(nbLignes = 20, nbColonnes = 10);
+      ReinitialiserPictureBox();
+      ligneCourante = 0;
+      colonneCourante = tableauEtats.GetLength(1) / 2 - 1;
+      timer1.Stop();
+      score = 0;
+      GererScore();
+    }
+
+    void ExecuterTestRetirerLigneD()
+    {
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0), i] = TypeEtat.GELE;
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0) - 2, i] = TypeEtat.GELE;
+      }
+      List<int> lignesCompleterTest = new List<int>();
+      lignesCompleterTest = VerifierLigne();
+      foreach (int line in lignesCompleterTest)
+      {
+        EffacerLigne(line);
+        DecalerLignes(line);
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0), i] == TypeEtat.NONE, "Erreur, n'a pas été effacé correctement.");
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0) - 2, i] == TypeEtat.NONE, "Erreur, n'a pas été effacé correctement.");
+      }
+
+      btnStart.Enabled = true;
+      InitialiserSurfaceDeJeu(nbLignes = 20, nbColonnes = 10);
+      GenererTableauEtat(nbLignes = 20, nbColonnes = 10);
+      ReinitialiserPictureBox();
+      ligneCourante = 0;
+      colonneCourante = tableauEtats.GetLength(1) / 2 - 1;
+      timer1.Stop();
+      score = 0;
+      GererScore();
+    }
+
+    void ExecuterTestRetirerLigneE()
+    {
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0), i] = TypeEtat.GELE;
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0) - 1, i] = TypeEtat.GELE;
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0) - 2, i] = TypeEtat.GELE;
+      }
+      List<int> lignesCompleterTest = new List<int>();
+      lignesCompleterTest = VerifierLigne();
+      foreach (int line in lignesCompleterTest)
+      {
+        EffacerLigne(line);
+        DecalerLignes(line);
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0), i] == TypeEtat.NONE, "Erreur, n'a pas été effacé correctement.");
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0) - 1, i] == TypeEtat.NONE, "Erreur, n'a pas été effacé correctement.");
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0) - 2, i] == TypeEtat.NONE, "Erreur, n'a pas été effacé correctement.");
+      }
+
+      btnStart.Enabled = true;
+      InitialiserSurfaceDeJeu(nbLignes = 20, nbColonnes = 10);
+      GenererTableauEtat(nbLignes = 20, nbColonnes = 10);
+      ReinitialiserPictureBox();
+      ligneCourante = 0;
+      colonneCourante = tableauEtats.GetLength(1) / 2 - 1;
+      timer1.Stop();
+      score = 0;
+      GererScore();
+    }
+
+    void ExecuterTestRetirerLigneF()
+    {
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0), i] = TypeEtat.GELE;
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0) - 1, i] = TypeEtat.GELE;
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0) - 2, i] = TypeEtat.GELE;
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        tableauEtats[tableauEtats.GetLength(0) - 3, i] = TypeEtat.GELE;
+      }
+
+      List<int> lignesCompleterTest = new List<int>();
+      lignesCompleterTest = VerifierLigne();
+      foreach (int line in lignesCompleterTest)
+      {
+        EffacerLigne(line);
+        DecalerLignes(line);
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0), i] == TypeEtat.NONE, "Erreur, n'a pas été effacé correctement.");
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0) - 1, i] == TypeEtat.NONE, "Erreur, n'a pas été effacé correctement.");
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0) - 2, i] == TypeEtat.NONE, "Erreur, n'a pas été effacé correctement.");
+      }
+      for (int i = 0; i < tableauEtats.GetLength(1); i++)
+      {
+        Debug.Assert(tableauEtats[tableauEtats.GetLength(0) - 3, i] == TypeEtat.NONE, "Erreur, n'a pas été effacé correctement.");
+      }
+
+      btnStart.Enabled = true;
+      InitialiserSurfaceDeJeu(nbLignes = 20, nbColonnes = 10);
+      GenererTableauEtat(nbLignes = 20, nbColonnes = 10);
+      ReinitialiserPictureBox();
+      ligneCourante = 0;
+      colonneCourante = tableauEtats.GetLength(1) / 2 - 1;
+      timer1.Stop();
+      score = 0;
+      GererScore();
     }
 
     #endregion
@@ -168,6 +395,8 @@ namespace TP3
       ligneCourante = 0;
       colonneCourante = tableauEtats.GetLength(1) / 2 - 1;
       timer1.Stop();
+      score = 0;
+      GererScore();
     }
     //</scloutier>
     #endregion
@@ -386,12 +615,6 @@ namespace TP3
       return lignesCompleter;
     }
     #endregion
-
-
-    void RotationPiece()
-    {
-
-    }
 
     #region ReinitialiserPictureBox
     ////<scloutier>
@@ -675,7 +898,8 @@ namespace TP3
           DecalerLignes(ligne);
           DessinerTableau();
         }
-
+        score += nbLigneADecaler.Count * 100;
+        GererScore();
       }
     }
 
@@ -755,7 +979,14 @@ namespace TP3
           }
         }
       }
-
     }
+
+    void GererScore()
+    {
+      scoreLabel.Text = score.ToString();
+    }
+
+    
+
   }
 }
