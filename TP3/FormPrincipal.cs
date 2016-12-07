@@ -162,6 +162,9 @@ namespace TP3
             InitialiserSurfaceDeJeu(nbLignes = 20, nbColonnes = 10);
             GenererTableauEtat(nbLignes = 20, nbColonnes = 10);
             ReinitialiserPictureBox();
+            ligneCourante = 0;
+            colonneCourante = tableauEtats.GetLength(1) / 2 - 1;
+            timer1.Stop();
         }
         //</scloutier>
         #endregion
@@ -205,30 +208,6 @@ namespace TP3
         }
         //</scloutier>
         #endregion
-
-        void blocDescend()
-        {
-            int nbLigneComplete = VerifierLigne();
-            EffacerLigne(nbLigneComplete);
-            while (partieEnCours == true)
-            {
-                if (partieEnCours == true)
-                {
-                    timer1.Start();
-                    pieceTableau = GenererPieceAleatoire();
-                    mouvement = Deplacement.DESCENDRE;
-                    VerifierDeplacement(mouvement);
-                    if (deplacementPossible == true)
-                    {
-                        ligneCourante++;
-                        EnleverAncienBloc();
-                        InitialiserPieceDansTableau(pieceTableau);
-                    }
-                }
-            }
-            partieEnCours = false;
-            timer1.Stop();
-        }
 
         #region GenererPieceAleatoire
         // <scloutier>
@@ -442,6 +421,8 @@ namespace TP3
             GenererTableauEtat(nbLignes, nbColonnes);
             pieceTableau = GenererPieceAleatoire();
             InitialiserPieceDansTableau(pieceTableau);
+            timer1.Start();
+            
         }
         //</scloutier>
         #endregion
@@ -467,34 +448,29 @@ namespace TP3
             if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
             {
                 mouvement = Deplacement.DESCENDRE;
-                deplacementPossible = false;
                 VerifierDeplacement(mouvement);
                 if (deplacementPossible == true)
                 {
                     EnleverAncienBloc();
                     ligneCourante++;
-
                     InitialiserPieceDansTableau(pieceTableau);
                 }
             }
             else if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
             {
                 mouvement = Deplacement.DROITE;
-                deplacementPossible = false;
                 VerifierDeplacement(mouvement);
                 if (deplacementPossible == true)
                 {
 
                     EnleverAncienBloc();
                     colonneCourante++;
-
                     InitialiserPieceDansTableau(pieceTableau);
                 }
             }
             else if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
             {
                 mouvement = Deplacement.GAUCHE;
-                deplacementPossible = false;
                 VerifierDeplacement(mouvement);
                 if (deplacementPossible == true)
                 {
@@ -517,6 +493,24 @@ namespace TP3
                         temp = -blocActifY[j];
                         blocActifY[j] = blocActifX[j];
                         blocActifX[j] = temp;
+                    }
+                    InitialiserPieceDansTableau(pieceTableau);
+                }
+            }
+            else if (e.KeyCode == Keys.Q)
+            {
+
+                mouvement = Deplacement.ROTATION_ANTIHORAIRE;
+                VerifierDeplacement(mouvement);
+                if (deplacementPossible == true)
+                {
+                    EnleverAncienBloc();
+                    int temp = 0;
+                    for (int j = 0; j < blocActifX.Length; j++)
+                    {
+                        temp = -blocActifX[j];
+                        blocActifX[j] = blocActifY[j];
+                        blocActifY[j] = temp;
                     }
                     InitialiserPieceDansTableau(pieceTableau);
                 }
@@ -588,11 +582,32 @@ namespace TP3
                     nouveauBlocActifX[i] = -blocActifY[i];
                     nouveauBlocActifY[i] = blocActifX[i];
 
-                    if (colonneCourante - blocActifY[i] > tableauEtats.GetLength(1) - 1 || colonneCourante - blocActifY[i] < 0 || ligneCourante + blocActifX[i] > tableauEtats.GetLength(0) - 1 || ligneCourante + blocActifX[i] < 0)
+                    if (ligneCourante + blocActifX[i] > tableauEtats.GetLength(0) - 1 || ligneCourante + blocActifX[i] < 0 || colonneCourante - blocActifY[i] > tableauEtats.GetLength(1) - 1 || colonneCourante - blocActifY[i] < 0 )
                     {
                         deplacementPossible = false;
                     }
                     else if (tableauEtats[ligneCourante + blocActifX[i], colonneCourante - blocActifY[i]] == TypeEtat.GELE)
+                    {
+                        deplacementPossible = false;
+                    }
+                    else if (pieceTableau == TypeEtat.CARRE)
+                    {
+                        deplacementPossible = false;
+                    }
+                }
+            }
+            else if (sens == Deplacement.ROTATION_ANTIHORAIRE)
+            {
+                for (int i = 0; i < blocActifX.Length; i++)
+                {
+                    nouveauBlocActifX[i] = blocActifY[i];
+                    nouveauBlocActifY[i] = - blocActifX[i];
+
+                    if (ligneCourante - blocActifX[i] < tableauEtats.GetLength(1)|| ligneCourante + blocActifX[i] < 0 || colonneCourante - blocActifY[i] > tableauEtats.GetLength(1) - 1 || colonneCourante - blocActifY[i] < 0)
+                    {
+                        deplacementPossible = false;
+                    }
+                    else if (tableauEtats[ligneCourante - blocActifX[i], colonneCourante + blocActifY[i]] == TypeEtat.GELE)
                     {
                         deplacementPossible = false;
                     }
@@ -634,13 +649,11 @@ namespace TP3
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
-            mouvement = Deplacement.DESCENDRE;
-            VerifierDeplacement(mouvement);
+            VerifierDeplacement(Deplacement.DESCENDRE);
             if (deplacementPossible == true)
             {
-                ligneCourante++;
                 EnleverAncienBloc();
+                ligneCourante++;
                 InitialiserPieceDansTableau(pieceTableau);
             }
         }
