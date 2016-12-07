@@ -677,11 +677,11 @@ namespace TP3
         EnleverAncienBloc();
         ligneCourante++;
         InitialiserPieceDansTableau(pieceTableau);
-        int nbLigne = VerifierLigne();
-        if (nbLigne != 0)
+        int nbLigneADecaler = VerifierLigne();
+        if (nbLigneADecaler != 0)
         {
-          EffacerLigne(nbLigne);
-          DecalerLignes(nbLigne);
+          EffacerLigne(nbLigneADecaler);
+          DecalerLignes(nbLigneADecaler);
         }
 
       }
@@ -701,9 +701,9 @@ namespace TP3
       nbDeSeconde++;
     }
 
-    void DecalerLignes(int nbLigne)
+    void DecalerLignes(int nbLigneADecaler)
     {
-      for (int i = 0; i < tableauEtats.GetLength(0); i++)
+      for (int i = nbLigneADecaler; i < tableauEtats.GetLength(0) - nbLigneADecaler; i++)
       {
         for (int j = 0; j < tableauEtats.GetLength(1); j++)
         {
