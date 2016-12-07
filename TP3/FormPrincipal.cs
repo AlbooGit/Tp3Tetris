@@ -15,6 +15,7 @@ namespace TP3
     {
         public FormPrincipal()
         {
+            FormStatistique stats = new FormStatistique(this);
             FormConfiguration config = new FormConfiguration(this);
             InitializeComponent();
         }
@@ -36,6 +37,7 @@ namespace TP3
         TypeEtat pieceTableau;
         bool partieEnCours = false;
         bool deplacementPossible = false;
+        public int nbDeSeconde = 0;
 
         #endregion
 
@@ -342,6 +344,7 @@ namespace TP3
             for (int i = 0; i < tableauEtats.GetLength(1); i++)
             {
                 tableauEtats[nbDeLaLigneComplete, i] = (int)TypeEtat.NONE;
+                toutesImagesVisuelles[nbDeLaLigneComplete, i].BackColor = Color.Black;
             }
         }
         #endregion
@@ -353,28 +356,33 @@ namespace TP3
             int nbLigneComplete = 0;
             bool ligneEstComplete = false;
             int compteurSiLigneComplete = 0;
+
             for (int i = 0; i < tableauEtats.GetLength(0); i++)
             {
 
                 for (int j = 0; j < tableauEtats.GetLength(1); j++)
+
                 {
-
-
                     if (tableauEtats[i, j] == TypeEtat.GELE)
+
                     {
                         compteurSiLigneComplete++;
-                    }
 
-                    if (compteurSiLigneComplete == tableauEtats.GetLength(1))
-                    {
-                        ligneEstComplete = true;
-                        compteurSiLigneComplete = 0;
-                    }
+                        if (compteurSiLigneComplete == tableauEtats.GetLength(1))
 
+                        {
 
-                    if (ligneEstComplete == true)
-                    {
-                        nbLigneComplete = i;
+                            ligneEstComplete = true;
+                            compteurSiLigneComplete = 0;
+                            if (ligneEstComplete == true)
+
+                            {
+
+                                nbLigneComplete = i;
+
+                            }
+
+                        }
                     }
                     else
                     {
@@ -421,8 +429,9 @@ namespace TP3
             GenererTableauEtat(nbLignes, nbColonnes);
             pieceTableau = GenererPieceAleatoire();
             InitialiserPieceDansTableau(pieceTableau);
+            timer2.Start();
             timer1.Start();
-            
+
         }
         //</scloutier>
         #endregion
@@ -582,7 +591,7 @@ namespace TP3
                     nouveauBlocActifX[i] = -blocActifY[i];
                     nouveauBlocActifY[i] = blocActifX[i];
 
-                    if (ligneCourante + blocActifX[i] > tableauEtats.GetLength(0) - 1 || ligneCourante + blocActifX[i] < 0 || colonneCourante - blocActifY[i] > tableauEtats.GetLength(1) - 1 || colonneCourante - blocActifY[i] < 0 )
+                    if (ligneCourante + blocActifX[i] > tableauEtats.GetLength(0) - 1 || ligneCourante + blocActifX[i] < 0 || colonneCourante - blocActifY[i] > tableauEtats.GetLength(1) - 1 || colonneCourante - blocActifY[i] < 0)
                     {
                         deplacementPossible = false;
                     }
@@ -601,9 +610,9 @@ namespace TP3
                 for (int i = 0; i < blocActifX.Length; i++)
                 {
                     nouveauBlocActifX[i] = blocActifY[i];
-                    nouveauBlocActifY[i] = - blocActifX[i];
+                    nouveauBlocActifY[i] = -blocActifX[i];
 
-                    if (ligneCourante - blocActifX[i] < tableauEtats.GetLength(1)|| ligneCourante + blocActifX[i] < 0 || colonneCourante - blocActifY[i] > tableauEtats.GetLength(1) - 1 || colonneCourante - blocActifY[i] < 0)
+                    if (ligneCourante - blocActifX[i] < tableauEtats.GetLength(1) || ligneCourante + blocActifX[i] < 0 || colonneCourante - blocActifY[i] > tableauEtats.GetLength(1) - 1 || colonneCourante - blocActifY[i] < 0)
                     {
                         deplacementPossible = false;
                     }
@@ -649,6 +658,7 @@ namespace TP3
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            VerifierFinDePartie();
             VerifierDeplacement(Deplacement.DESCENDRE);
             if (deplacementPossible == true)
             {
@@ -658,9 +668,24 @@ namespace TP3
                 int nbLigne = VerifierLigne();
                 if (nbLigne != 0)
                 {
-                  EffacerLigne(nbLigne);
+                    EffacerLigne(nbLigne);
                 }
+
             }
+        }
+
+        void VerifierFinDePartie()
+        {
+            if (tableauEtats[1, colonneCourante / 2] == TypeEtat.GELE)
+            {
+                FormStatistique stats = new FormStatistique(this);
+                stats.ShowDialog();
+            }
+        }
+
+        public void timer2_Tick(object sender, EventArgs e)
+        {
+            nbDeSeconde++;
         }
     }
 }
