@@ -13,7 +13,10 @@ namespace TP3
     public partial class FormStatistique : Form
     {
         FormPrincipal principal;
-
+        /// <summary>
+        /// Initialise les statistiques de fin de partie
+        /// </summary>
+        /// <param name="formPrincipal"></param>
         public FormStatistique(FormPrincipal formPrincipal)
         {
             InitializeComponent();

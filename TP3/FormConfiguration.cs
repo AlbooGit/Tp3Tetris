@@ -25,6 +25,11 @@ namespace TP3
             this.Close();
         }
 
+        /// <summary>
+        /// <aouellet>Bouton qui initialise un nouveau tableau avec de nouvelle dimensions
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void btnOkConfig_Click(object sender, EventArgs e)
         {
 
@@ -43,6 +48,11 @@ namespace TP3
 
         }
 
+        /// <summary>
+        /// <scloutier> Reinitialise les valeurs du tableau de jeu à celle d'origine
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReset_Click(object sender, EventArgs e)
         {
             numericUpDown1.Value = 20;
