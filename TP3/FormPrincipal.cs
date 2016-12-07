@@ -113,8 +113,12 @@ namespace TP3
     /// </summary>
     void ExecuterTestsUnitaires()
     {
-      ExecuterTestABC();
-      // A compléter...
+      /* ExecuterTestRetirerLigneA();
+      ExecuterTestRetirerLigneB();
+      ExecuterTestRetirerLigneC();
+      ExecuterTestRetirerLigneD();
+      ExecuterTestRetirerLigneE();
+      ExecuterTestRetirerLigneF();*/
     }
 
     // A renommer et commenter!
@@ -122,7 +126,7 @@ namespace TP3
     {
       for (int i = 0; i < tableauEtats.GetLength(1); i++)
       {
-        tableauEtats[tableauEtats.GetLength(0), i] = TypeEtat.GELE;
+        tableauEtats[tableauEtats.GetLength(0) -1 , i] = TypeEtat.GELE;
       }
       List<int> lignesCompleterTest = new List<int>();
       lignesCompleterTest = VerifierLigne();
@@ -985,8 +989,5 @@ namespace TP3
     {
       scoreLabel.Text = score.ToString();
     }
-
-    
-
   }
 }
