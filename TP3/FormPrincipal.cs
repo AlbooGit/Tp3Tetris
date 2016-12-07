@@ -655,6 +655,11 @@ namespace TP3
                 EnleverAncienBloc();
                 ligneCourante++;
                 InitialiserPieceDansTableau(pieceTableau);
+                int nbLigne = VerifierLigne();
+                if (nbLigne != 0)
+                {
+                  EffacerLigne(nbLigne);
+                }
             }
         }
     }
